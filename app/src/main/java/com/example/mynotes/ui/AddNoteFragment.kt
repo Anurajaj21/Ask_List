@@ -1,11 +1,10 @@
 package com.example.mynotes.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.navigation.Navigation
 import com.example.mynotes.R
 import com.example.mynotes.db.Note
@@ -24,6 +23,7 @@ class AddNoteFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_add_note, container, false)
     }
 
@@ -70,6 +70,36 @@ class AddNoteFragment : BaseFragment() {
             Navigation.findNavController(view).navigate(AddNoteFragmentDirections.actionSaveNote())
         }
 
-         }
+    }
+
+    private fun deleteNote(){
+
+        AlertDialog.Builder(context).apply {
+            setTitle("Are you sure?")
+            setMessage("You cannot get back the deleted note.")
+            setPositiveButton("YES"){_,_ ->
+                launch {
+                    NoteDatabase(context).getNoteDao().deleteNote(argnote!!)
+                    context.toast("Note Deleted")
+                }
+                Navigation.findNavController(requireView()).navigate(AddNoteFragmentDirections.actionSaveNote())
+
+            }
+            setNegativeButton("NO"){_,_ ->
+
+                }
+        }.create().show()
+
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.deleteNote-> if(argnote != null) deleteNote() else context?.toast("Cannot Deleted")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
 
 }

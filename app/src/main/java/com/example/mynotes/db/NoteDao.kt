@@ -1,9 +1,6 @@
 package com.example.mynotes.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface NoteDao {
@@ -18,4 +15,7 @@ interface NoteDao {
 
     @Update
     suspend fun update(note: Note)
+
+    @Delete
+    suspend fun deleteNote(note: Note)
 }
