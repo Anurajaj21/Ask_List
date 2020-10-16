@@ -3,6 +3,7 @@ package com.example.mynotes.db
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface NoteDao {
@@ -14,4 +15,7 @@ interface NoteDao {
 
     @Insert
     suspend fun addMultipleNote(vararg note: Note)
+
+    @Update
+    suspend fun update(note: Note)
 }

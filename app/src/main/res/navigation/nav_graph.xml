@@ -21,5 +21,10 @@
         <action
             android:id="@+id/actionSaveNote"
             app:destination="@id/homeFragment" />
+        <argument
+            app:argType="com.example.mynotes.db.Note"
+            android:name="Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

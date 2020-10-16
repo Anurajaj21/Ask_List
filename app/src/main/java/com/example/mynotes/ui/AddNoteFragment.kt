@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.mynotes.R
 import com.example.mynotes.db.Note
 import com.example.mynotes.db.NoteDatabase
@@ -17,6 +18,7 @@ import kotlin.coroutines.CoroutineContext
 
 class AddNoteFragment : BaseFragment() {
 
+    private var argnote: Note? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +29,15 @@ class AddNoteFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        arguments?.let {
+            argnote = AddNoteFragmentArgs.fromBundle(it).note
+            title.setText(argnote?.title)
+            note.setText(argnote?.note)
+        }
         //NoteDatabase(requireActivity()).getNoteDao().
-        button_save.setOnClickListener setOnClickLister@{
-             val noteTitle = title.text.toString().trim()
+        button_save.setOnClickListener setOnClickLister@{ view -> view
+            val noteTitle = title.text.toString().trim()
              val noteBody = note.text.toString().trim()
 
              if(noteTitle.isEmpty()) {
@@ -42,21 +50,25 @@ class AddNoteFragment : BaseFragment() {
                  note.requestFocus()
                  return@setOnClickLister
              }
-            MainScope().launch {
-                val note = Note(noteTitle, noteBody)
+            launch {
 
                 context?.let{
-                    Log.i("AddNoteFragment", "called2")
+                    val mNote = Note(noteTitle, noteBody)
+                    if(argnote == null){
+                        NoteDatabase(it).getNoteDao().addNote(mNote)
+                        it.toast("Note Saved")
+                    }
+                    else{
+                        mNote.id = argnote!!.id
+                        NoteDatabase(it).getNoteDao().update(mNote)
+                        it.toast("Note Updated")
+                    }
 
-                    NoteDatabase(it).getNoteDao().addNote(note)
-                    it.toast("Note Saved")
-                    Log.i("AddNoteFragment", "called3")
 
                 }
             }
-
-                 //NoteDatabase(requireActivity()).getNoteDao().addNote(note)
-             }
+            Navigation.findNavController(view).navigate(AddNoteFragmentDirections.actionSaveNote())
+        }
 
          }
 
