@@ -13,9 +13,6 @@ interface NoteDao {
     @Insert
     suspend fun addMultipleNote(vararg note: Note)
 
-    @Update
-    suspend fun update(note: Note)
-
-    @Delete
-    suspend fun deleteNote(note: Note)
+    @Query("SELECT* FROM Note WHERE id = (SELECT MAX(id) FROM Note)")
+    suspend fun getlatestNote(): Note
 }

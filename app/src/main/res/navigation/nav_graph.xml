@@ -13,6 +13,14 @@
         <action
             android:id="@+id/actionaddnote"
             app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_note_list"
+            app:destination="@id/note_list" />
+        <argument
+            android:name="Note"
+            app:argType="com.example.mynotes.db.Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
@@ -26,5 +34,14 @@
             android:name="Note"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/note_list"
+        android:name="com.example.mynotes.ui.note_list"
+        android:label="fragment_note_list"
+        tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_note_list_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

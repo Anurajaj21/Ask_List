@@ -1,25 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:backgroundTint="#BAD898">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_notes"
+
+    <Button
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:backgroundTint="#385C0E"
+        android:text="@string/tasks_list"
+        android:textSize="20sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/latest"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#385C0E"
+        android:foregroundGravity="center_vertical|center|center_horizontal"
+        android:visibility="visible"
+        app:cardCornerRadius="25dp"
+        app:contentPadding="4dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <TextView
+            android:id="@+id/latest_task_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/latest_task_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:padding="4dp"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24sp"
+            tools:text="Description" />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/list"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="208dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="#CA9999" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#385C0E"
+        android:text="ADD TASK"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/added_tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/latest"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="-131dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:padding="4dp"
+        android:text="Added Tasks :"
+        android:textAlignment="center"
+        android:textColor="#385C0E"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/added_tasks"
+        android:layout_alignBottom="@+id/added_tasks"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="-3dp"
+        android:layout_toEndOf="@+id/added_tasks"
+        android:fontFamily="sans-serif-smallcaps"
+        android:padding="4dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#385C0E"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+
 </RelativeLayout>
